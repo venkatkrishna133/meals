@@ -1,27 +1,49 @@
 import React from "react";
 import styled from "styled-components/native";
 import { Card } from "react-native-paper";
-import { Text,View } from "react-native";
-
+import { Text, View ,Image} from "react-native";
+import { SvgXml } from "react-native-svg";
+import star from "../../../../assets/star";
+import open from "../../../../assets/open";
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
     name = "Your name",
-    icon,
+    icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
     photos = [
       "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
     ],
     address = "100 some random street",
     isOpenNow = true,
-    rating = 4,
-    isClosedTemporarily,
+    rating = 3.1,
+    isClosedTemporarily=false,
   } = restaurant;
+
+  const ratingArray = Array.from(new Array(Math.floor(rating)))
   return (
     <>
       <RestaurantCard elevation={10}>
         <RestaurantCover key={name} source={{ uri: photos[0] }} />
         <Info>
           <Title>{name}</Title>
-          <Address>{ address}</Address>
+          <Section>
+            <Rating>
+              {ratingArray.map(() => (
+                <SvgXml xml={star} width={20} height={20} />
+              ))}
+            </Rating>
+            <SectionEnd>
+              {isClosedTemporarily && (
+                <Text varient="label" style={{ color: "red" }}>
+                  CLOSED TEMPORARILY
+                </Text>
+              )}
+              <View style={{ paddingLeft: 16 }} />
+              {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
+              <View style={{ paddingLeft: 16 }} />
+              <Image style={{ width: 15, height: 15 }} source={{uri:icon}}/>
+            </SectionEnd>
+          </Section>
+          <Address>{address}</Address>
         </Info>
       </RestaurantCard>
     </>
@@ -34,11 +56,23 @@ const Title = styled(Text)`
   
   color: ${(props) => props.theme.colors.ui.primary};
 `;
+const Rating = styled(View)`
+flex-direction:row;
+padding-top:${(props) => props.theme.space[1]}
+padding-bottom:${(props)=>props.theme.space[1]}`;
 const Address = styled(Text)`
   font-family: ${(props) => props.theme.fonts.body};
   font-size: ${(props) => props.theme.fontSizes.caption};
 `;
+const Section = styled(View)`
+flex-direction:row;
+align-items:center;`;
 
+const SectionEnd = styled(View)`
+flex:1;
+flex-direction:row;
+justify-content:flex-end;
+`;
 const Info = styled(View)`
   padding: ${(props) => props.theme.space[3]};
 `;
