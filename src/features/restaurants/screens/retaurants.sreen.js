@@ -8,18 +8,6 @@ import {
 import styled from "styled-components/native";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 
-const SafeArea = styled(SafeAreaView)`
-  flex: 1;
-  padding-top: ${ Platform.OS === "android" ? StatusBar.currentHeight:0}px;
-`;
-const SearchView = styled(View)`
-  padding: ${StatusBar.currentHeight}px;
-`;
-const ListView = styled(View)`
-  background-color: yellow;
-  flex: 1;
-  padding: 16px;
-`;
 export const RestaurantsScreen = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
 
@@ -40,3 +28,15 @@ export const RestaurantsScreen = () => {
     </SafeArea>
   );
 };
+
+const SafeArea = styled(SafeAreaView)`
+  flex: 1;
+  padding-top: ${Platform.OS === "android" ? StatusBar.currentHeight : 0}px;
+`;
+const SearchView = styled(View)`
+  padding: ${(props)=>props.theme.space[3]};
+`;
+const ListView = styled(View)`
+  flex: 1;
+  padding: ${(props)=>props.theme.space[3]};
+`;
