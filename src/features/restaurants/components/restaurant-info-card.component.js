@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import { Card } from "react-native-paper";
-import { Text } from "react-native";
-
+import { Text,View } from "react-native";
 
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
@@ -20,23 +19,34 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     <>
       <RestaurantCard elevation={10}>
         <RestaurantCover key={name} source={{ uri: photos[0] }} />
-        <Title>{name}</Title>
+        <Info>
+          <Title>{name}</Title>
+          <Address>{ address}</Address>
+        </Info>
       </RestaurantCard>
     </>
   );
 };
 
-
 const Title = styled(Text)`
-  padding: ${(props)=>props.theme.space[3]};
+  font-family:${(props) => props.theme.fonts.heading};
+  font-size:${(props) => props.theme.fontSizes.body}
+  
   color: ${(props) => props.theme.colors.ui.primary};
+`;
+const Address = styled(Text)`
+  font-family: ${(props) => props.theme.fonts.body};
+  font-size: ${(props) => props.theme.fontSizes.caption};
+`;
+
+const Info = styled(View)`
+  padding: ${(props) => props.theme.space[3]};
 `;
 
 const RestaurantCard = styled(Card)`
-  
-  background-color: ${(props)=>props.theme.colors.bg.primary};
+  background-color: ${(props) => props.theme.colors.bg.primary};
 `;
 const RestaurantCover = styled(Card.Cover)`
-  padding: ${(props)=>props.theme.space[3]}
-  background-color:${(props)=>props.theme.colors.bg.primary};
+  padding: ${(props) => props.theme.space[3]}
+  background-color:${(props) => props.theme.colors.bg.primary};
 `;
