@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components/native";
-
+import { theme } from "../../../infrastructure/theme";
 import { Card } from "react-native-paper";
 
 const Title = styled.Text`
   padding: 16px;
-  color: red;
+  color: ${(props) => props.theme.colors.ui.primary};
 `;
 
 const RestaurantCard = styled(Card)`
