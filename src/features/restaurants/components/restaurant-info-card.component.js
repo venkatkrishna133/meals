@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components/native";
 import { Card } from "react-native-paper";
-import { Text, View ,Image} from "react-native";
+import { Text, View, Image } from "react-native";
 import { SvgXml } from "react-native-svg";
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
+import { Spacer } from "../../../components/spacer/spacer.component";
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
     name = "Your name",
@@ -15,13 +16,13 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     address = "100 some random street",
     isOpenNow = true,
     rating = 3.1,
-    isClosedTemporarily=false,
+    isClosedTemporarily = false,
   } = restaurant;
 
-  const ratingArray = Array.from(new Array(Math.floor(rating)))
+  const ratingArray = Array.from(new Array(Math.floor(rating)));
   return (
     <>
-      <RestaurantCard elevation={10}>
+      <RestaurantCard elevation={1}>
         <RestaurantCover key={name} source={{ uri: photos[0] }} />
         <Info>
           <Title>{name}</Title>
@@ -33,14 +34,19 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
             </Rating>
             <SectionEnd>
               {isClosedTemporarily && (
-                <Text varient="label" style={{ color: "red" }}>
+                <Text variant="label" style={{ color: "red" }}>
                   CLOSED TEMPORARILY
                 </Text>
               )}
-              <View style={{ paddingLeft: 16 }} />
-              {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
-              <View style={{ paddingLeft: 16 }} />
-              <Image style={{ width: 15, height: 15 }} source={{uri:icon}}/>
+              <Spacer position="left" size="large">
+                {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
+              </Spacer>
+              <Spacer position="left" size="large">
+                <Image
+                  style={{ width: 15, height: 15 }}
+                  source={{ uri: icon }}
+                />
+              </Spacer>
             </SectionEnd>
           </Section>
           <Address>{address}</Address>
@@ -59,19 +65,21 @@ const Title = styled(Text)`
 const Rating = styled(View)`
 flex-direction:row;
 padding-top:${(props) => props.theme.space[1]}
-padding-bottom:${(props)=>props.theme.space[1]}`;
+padding-bottom:${(props) => props.theme.space[1]}`;
+
 const Address = styled(Text)`
   font-family: ${(props) => props.theme.fonts.body};
   font-size: ${(props) => props.theme.fontSizes.caption};
 `;
 const Section = styled(View)`
-flex-direction:row;
-align-items:center;`;
+  flex-direction: row;
+  align-items: center;
+`;
 
 const SectionEnd = styled(View)`
-flex:1;
-flex-direction:row;
-justify-content:flex-end;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
 `;
 const Info = styled(View)`
   padding: ${(props) => props.theme.space[3]};
