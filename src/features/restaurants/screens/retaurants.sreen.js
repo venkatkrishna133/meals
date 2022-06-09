@@ -8,7 +8,7 @@ import {
 import styled from "styled-components/native";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
-
+import { SafeArea } from "../../../components/utility/safe-area.component";
 
 export const RestaurantsScreen = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -43,10 +43,6 @@ export const RestaurantsScreen = () => {
   );
 };
 
-const SafeArea = styled(SafeAreaView)`
-  flex: 1;
-  padding-top: ${Platform.OS === "android" ? StatusBar.currentHeight : 0}px;
-`;
 const SearchView = styled(View)`
   padding: ${(props)=>props.theme.space[3]};
 `;
