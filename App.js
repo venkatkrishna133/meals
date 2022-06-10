@@ -16,7 +16,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SafeArea } from "./src/components/utility/safe-area.component";
 import { Ionicons } from "@expo/vector-icons";
-
+import { restaurantsRequest } from "./src/services/restaurants/restaurants.services";
 
 export default function App() {
   const [oswaldLoaded] = useOswalds({
@@ -55,7 +55,7 @@ const Tab = createBottomTabNavigator();
 
 const Settings = () => (
   <SafeArea>
-    <Text>Setthnnnnnnnnn xings</Text>
+    <Text>Settings</Text>
   </SafeArea>
 );
 const Map = () => (
